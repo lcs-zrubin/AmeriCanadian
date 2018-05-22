@@ -15,33 +15,64 @@ var expectedCountOfWordsToTranslate = 3
 // Implement the primary logic of the problem here
 // Some output may be given here if you desire
 
-// NOTE:
-//
-// Some example code that may be useful
-var word = "tour"
-let isAmerican = word.hasSuffix("or")
-print(isAmerican)
-var reversedWord = String(word.reversed())
-print("The reversed word is: \(reversedWord)")
-var originalWord = String(reversedWord.reversed())
-print("The reversed word, reversed again is: \(originalWord)")
 
-// Example of how to collect multiple input lines
-for counter in 1...expectedCountOfWordsToTranslate {
-    
-    // Get each word
-    print("Enter word #\(counter):")
-    
-    // Get the input (use guard-let to guarantee it is not nil)
-    // and then print it out
+
+var validExpectedCount = 0
+
+while 1 == 1 {
+    //Test #1
+    print("How many words will be provided?")
     guard let givenInput = readLine() else {
-        // If someone enters nil input, just skip to the next line
         continue
     }
+    //Test #2
+    guard let givenInteger = Int(givenInput) else {
+        continue
+    }
+    //Test #3
+    if givenInteger < 0 || givenInteger > 10 {
+        continue
+    }
+    validExpectedCount = givenInteger
+    break
+}
+var validWordGiven = ""
+
+
+for counter in 1...validExpectedCount {
     
-    // Now we have the line, we can print it out, analyze it as needed, et cetera
-    print(givenInput)
+    print("Enter word #\(counter):")
+    //Test #1
+    guard let givenInput = readLine() else {
+        continue
+    }
+    validWordGiven = givenInput
     
+    
+    
+    var word = validWordGiven
+    var stringReversedWord = ""
+    var canadianWord = ""
+    
+    if word.count > 4 {
+        if word.hasSuffix("or") == true {
+            var reversedWord = String(word.reversed())
+            
+            for letter in reversedWord {
+                stringReversedWord += String(letter)
+                if stringReversedWord.characters.count == 1 {
+                    stringReversedWord += "u"
+                }
+                
+            }
+            var canadianWord = String(stringReversedWord.reversed())
+            print("The translation is \(canadianWord)")
+        } else {
+            print("The translation is \(word)")
+        }
+    } else {
+        print("The translation is \(word)")
+    }
 }
 
 // OUTPUT
